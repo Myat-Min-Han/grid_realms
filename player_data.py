@@ -4,7 +4,7 @@ import os
 DATA_FILE = "players.json"
 
 def load_all_data():
-    """Read the entire JSON file. Create it if missing."""
+    #read the entire JSON file. Create it if missing.
     if not os.path.exists(DATA_FILE):
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump([], f)
@@ -16,12 +16,12 @@ def load_all_data():
         return []
 
 def save_all_data(players_list):
-    """Overwrite the JSON file with the current list."""
+    #overwrite the JSON file with the current list.
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(players_list, f, indent=4)
 
 def find_player_in_db(name):
-    """Check if a name exists and return its data."""
+    #check if a name exists and return its data.
     db = load_all_data()
     for p in db:
         if p["name"].lower() == name.lower():
@@ -29,9 +29,9 @@ def find_player_in_db(name):
     return None
 
 def save_or_update_db(player_obj):
-    """Sync the Player object data back to the JSON file."""
+    #sync the Player object data back to the JSON file.
     db = load_all_data()
-    # Prepare the data dictionary from the object
+    # prepare the data dictionary from the object
     new_data = {
         "name": player_obj.name,
         "health": player_obj.health,
@@ -43,11 +43,11 @@ def save_or_update_db(player_obj):
     found = False
     for i in range(len(db)):
         if db[i]["name"].lower() == player_obj.name.lower():
-            db[i] = new_data # Update existing
+            db[i] = new_data # update existing data
             found = True
             break
     
     if not found:
-        db.append(new_data) # Add new
+        db.append(new_data) # add new player data
     
     save_all_data(db)
