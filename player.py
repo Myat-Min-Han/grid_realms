@@ -1,34 +1,15 @@
-from colorama import Fore, Style
-import json
-import os
+class Player:
+    def __init__(self, name, health=100, coin=0, level=1, realm="Mortal World"):
+        # Temporary data held in memory
+        self.name = name
+        self.health = health
+        self.coin = coin
+        self.level = level
+        self.realm = realm
 
-DATA_FILE = "players.json"
-
-#create player JSON
-def load_players():
-    if not os.path.exists(DATA_FILE):
-        return []
-    with open(DATA_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_players(players):
-    with open(DATA_FILE, "w", encoding="utf-8") as f:
-        json.dump(players, f, indent=4)
-
-
-#player data
-def find_player(players, name, id):
-    for p in players:
-        if p["name"] == name and p["id"] == id:
-            return p
-    return None
-
-
-def create_player(name, id):
-    return {
-        "name": name,
-        "id": id,
-        "score": 0,
-        "level": 1
-    }
+    def show_status(self):
+        """Display current temporary stats."""
+        print(f"\n--- {self.name}'s Stats ---")
+        print(f"Health: {self.health} | Coins: {self.coin}")
+        print(f"Level: {self.level} | Realm: {self.realm}")
+        print("--------------------------")
