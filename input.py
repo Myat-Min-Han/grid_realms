@@ -7,8 +7,11 @@ def ask_choice(prompt: str, choices: list[str]) -> str:
 
 def ask_yes_no(prompt: str) -> bool:
     while True:
-        choice = input(prompt).lower()
+        choice = input(prompt).lower().strip()
         if choice in ["y", "yes"]:
             return True
         elif choice in ["n", "no"]:
             return False
+        else:
+            print("Please answer with 'y' or 'n'.")
+
